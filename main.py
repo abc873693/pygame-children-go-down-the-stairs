@@ -1,6 +1,6 @@
 import util
 import models
-import pygame,random
+import pygame,random,time
 import colors
 from pygame.locals import *
 
@@ -12,6 +12,12 @@ pygame.init()
 screen = pygame.display.set_mode((mWidth, mHeight), 0, 32)
 pygame.display.set_caption("Sprite 精靈類別測試：one cat")
 framerate = pygame.time.Clock()
+font = pygame.font.Font("fonts/msjh.ttf", 24)  
+
+counts=0# 初始化计时器
+COUNT = pygame.USEREVENT+1 # 自定义计时事件
+pygame.time.set_timer(COUNT,1500)# 每隔1.5秒发送一次自定义事件
+
 
 all_floor = pygame.sprite.Group()
 
@@ -33,7 +39,10 @@ for i in range(5):
 state_character = 0
 gameLoop = True
 while gameLoop:
+    
     for event in pygame.event.get():
+      if event.type == COUNT:
+            counts=counts+1
       if event.type == pygame.QUIT:
         gameLoop = False
       if (event.type == pygame.KEYDOWN):
@@ -57,10 +66,12 @@ while gameLoop:
     screen.fill(colors.black)
     character.update(state_character)
     character.draw(screen)
-    #group.update(state_character)
-    #group.draw(screen)
-    #floor.update(mWidth,mHeight)
-    #floor.draw(screen)
+   
+    text = "層數" 
+    util.showText(screen,font,text,360,15)
+    countstext=str(counts)
+    util.showText(screen,font,countstext,360,50)
+    
     
     # for item in group.sprites():
     #     if type(item) == models.Character:
