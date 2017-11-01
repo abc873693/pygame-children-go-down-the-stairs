@@ -59,7 +59,6 @@ class Character(pygame.sprite.Sprite):
 
 
 class Floor(pygame.sprite.Sprite):
-
     default = 0
 
     def __init__(self, target):
@@ -77,18 +76,21 @@ class Floor(pygame.sprite.Sprite):
         self.last_frame = 0
         self.columns = 1
         self.last_time = 0
-        self.type = default
-
-    def load(self):
-        if(self.type== Floor.default):
-            self.master_image = pygame.image.load(
-            "images/normal.png").convert_alpha()
-            self.frame_width = 97
-            self.frame_height = 16
-        self.rect = 0, 0, self.frame_width, self.frame_height
-        rect = self.master_image.get_rect()
-        self.last_frame = (rect.width // width) * (rect.height // height) - 1
         
 
+    def load(self,xx,yy):
+        self.master_image = pygame.image.load("images/normal.png").convert_alpha()
+        self.frame_width = 97
+        self.frame_height = 16
+        self.rect = xx,yy,self.frame_width,self.frame_height 
+        rect = self.master_image.get_rect()
+        
     def update(self):
-        pass
+        self.rect.y -= 1
+        if (self.rect.y <0):
+            self.rect.y = -1 * self.frame_height
+
+    def draw(self, surface):
+        surface.blit(self.image,(frame_x,frame_y))
+    
+       
