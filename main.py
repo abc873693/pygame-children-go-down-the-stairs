@@ -1,6 +1,6 @@
 import util
 import models
-import pygame,random
+import pygame,random, time
 import colors
 from pygame.locals import *
 
@@ -9,6 +9,7 @@ from pygame.locals import *
 mWidth = 400
 mHeight = 400
 pygame.init()
+pygame.mixer.init()  # 運行之前需要初始化
 screen = pygame.display.set_mode((mWidth, mHeight), 0, 32)
 pygame.display.set_caption("Sprite 精靈類別測試：one cat")
 framerate = pygame.time.Clock()
@@ -31,6 +32,7 @@ floor.load(floor_x,floor_y)
 state_character = 0
 gameLoop = True
 while gameLoop:
+    util.playdied(pygame)
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         gameLoop = False
