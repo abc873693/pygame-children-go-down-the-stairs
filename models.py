@@ -95,10 +95,10 @@ class Floor(pygame.sprite.Sprite):
         self.image = self.master_image
 
     def update(self,width,height):
-        self.rect.centery += 1
-        if self.rect.centery >= height:
+        self.rect.centery -= 1
+        if self.rect.centery <= 0:
             self.rect.centerx = random.randrange(30, width-30)
-            self.rect.centery = 8
+            self.rect.centery = 392
         #self.master_image.get_rect().centery -= 1
         #if (self.master_image.get_rect().centery < 0):
         #     self.master_image.get_rect().centery = -1 * self.frame_height
