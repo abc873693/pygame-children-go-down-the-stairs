@@ -26,13 +26,15 @@ class Character(pygame.sprite.Sprite):
         self.last_frame = 15
         self.last_time = 0
 
-    def load(self):
+    def load(self,x,y):
         self.master_image = pygame.image.load(
             "images/player.png").convert_alpha()
         self.frame_width = 32
         self.frame_height = 32
         self.rect = 0, 0, self.frame_width, self.frame_height
         self.image_rect = self.master_image.get_rect()
+        self.image_rect.centerx = x
+        self.image_rect.centery = y
 
     def update(self, status):
         frame_x = self.frame_width * Character.rect_defualt[0]
