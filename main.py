@@ -14,15 +14,17 @@ screen = pygame.display.set_mode((mWidth, mHeight), 0, 32)
 pygame.display.set_caption("Sprite 精靈類別測試：one cat")
 framerate = pygame.time.Clock()
 
-group = pygame.sprite.Group()
+all_floor = pygame.sprite.Group()
+
 character = models.Character(screen)
 character.load()
-group.add(character)
 
-floor_x = random.randrange(0, mWidth)
-floor_y = mHeight
-floor = models.Floor(screen)
-floor.load(floor_x,floor_y)
+for i in range(5):
+  floor = models.Floor(screen)
+  floor_x = random.randrange(30, mWidth-30)
+  floor_y = -i * 80 
+  floor.load(floor_x,floor_y)
+  all_floor.add(floor)
 
 
 # floor = models.Floor(screen)
@@ -57,14 +59,19 @@ while gameLoop:
     screen.fill(colors.black)
     character.update(state_character)
     character.draw(screen)
-    floor.update()
-    floor.draw(screen)
+    #group.update(state_character)
+    #group.draw(screen)
+    #floor.update(mWidth,mHeight)
+    #floor.draw(screen)
     
     # for item in group.sprites():
     #     if type(item) == models.Character:
     #         models.Character(item).update(ticks)
     #     if type(item) == models.Floor:
     #         models.Floor(item).update(ticks)
+    
+    all_floor.update(mWidth,mHeight)
+    all_floor.draw(screen)
     pygame.display.update()
-    framerate.tick(50)
+    framerate.tick(80)
 pygame.quit()

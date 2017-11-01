@@ -1,4 +1,4 @@
-import pygame
+import pygame,random
 from pygame.locals import *
 
 
@@ -81,18 +81,22 @@ class Floor(pygame.sprite.Sprite):
         self.columns = 1
         self.last_time = 0
 
-    def load(self, x, y):
+    def load(self,x,y):
         self.master_image = pygame.image.load(
             "images/normal.png").convert_alpha()
         self.frame_width = 97
         self.frame_height = 16
-        self.rect = x, y, self.frame_width, self.frame_height
-        self.image_rect = self.master_image.get_rect()
+        self.image_rect = x, y, self.frame_width, self.frame_height
+        self.rect = self.master_image.get_rect()
+        self.rect.centerx = x
+        self.rect.centery = y
+        self.image = self.master_image
 
-    def update(self):
-        self.master_image.get_rect().centery -= 1
-        if (self.master_image.get_rect().centery < 0):
-             self.master_image.get_rect().centery = -1 * self.frame_height
-
-    def draw(self, surface):
-        surface.blit(self.master_image, (self.image_rect[0], self.image_rect[1]))
+    def update(self,width,height):
+        self.rect.centery += 1
+        if self.rect.centery >= height:
+            self.rect.centerx = random.randrange(30, width-30)
+            self.rect.centery = 8
+        #self.master_image.get_rect().centery -= 1
+        #if (self.master_image.get_rect().centery < 0):
+        #     self.master_image.get_rect().centery = -1 * self.frame_height
