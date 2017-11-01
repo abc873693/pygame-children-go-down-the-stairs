@@ -21,7 +21,7 @@ character.load()
 for i in range(5):
   floor = models.Floor(screen)
   floor_x = random.randrange(30, mWidth-30)
-  floor_y = -i * 80 
+  floor_y = i * 80 
   floor.load(floor_x,floor_y)
   all_floor.add(floor)
 
