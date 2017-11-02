@@ -12,7 +12,7 @@ mHeight = 400
 pygame.init()
 pygame.mixer.init()  # 運行之前需要初始化
 screen = pygame.display.set_mode((mWidth, mHeight), 0, 32)
-pygame.display.set_caption("Sprite 精靈類別測試：one cat")
+pygame.display.set_caption("小朋友下樓梯")
 framerate = pygame.time.Clock()
 font = pygame.font.Font("fonts/msjh.ttf", 24)
 
